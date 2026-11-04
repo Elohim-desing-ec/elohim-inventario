@@ -200,3 +200,23 @@ dialog::backdrop { background: rgba(0, 4, 32, 0.6); -webkit-backdrop-filter: blu
 }
 .toast.is-bad { background: #5c0f22; }
 @media (max-width: 900px) { .toast { bottom: calc(100px + env(safe-area-inset-bottom, 0px)); } }
+
+/* =========================================================
+   CELULAR: formularios en una sola columna para que nada choque
+   ========================================================= */
+.input { min-width: 0; max-width: 100%; }
+/* La fecha en iPhone ocupa más ancho: se ajusta al espacio disponible */
+input[type="date"].input { -webkit-appearance: none; appearance: none; display: block; min-width: 0; }
+input[type="date"].input::-webkit-date-and-time-value { text-align: left; }
+/* Al abrir un formulario, que el menú de arriba no lo tape */
+.card, .page-head, #formVenta, #formGasto { scroll-margin-top: calc(var(--header-h) + 28px); }
+@media (max-width: 560px) {
+  .form-grid, .form-grid--3 { grid-template-columns: 1fr; gap: 12px; }
+  .form-grid .full, .form-grid [style*="grid-column"] { grid-column: auto !important; }
+  .form-grid .calc { grid-column: auto; }
+  .form-actions .btn { flex: 1 1 100%; }
+  .actions-bar .btn { flex: 1 1 auto; }
+  .filters .input { font-size: 16px; }
+  .filters .input--search { flex-basis: 100%; }
+  .card { padding: 18px 16px; }
+}
