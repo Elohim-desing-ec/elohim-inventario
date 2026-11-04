@@ -1,0 +1,6 @@
+# Datos locales del programa de Python (nunca se suben a GitHub)
+datos/
+*.tmp
+__pycache__/
+.DS_Store
+.playwright-mcp/

@@ -1,0 +1,150 @@
+/* =========================================================
+   ELOHIM INVENTARIO · ESTILOS DE CADA SECCIÓN
+   Resumen (banda azul, tarjetas, gráfico), Ventas (recibo),
+   Gastos (categorías).
+   ========================================================= */
+
+/* ---------- RESUMEN: banda azul principal ---------- */
+.hero {
+  position: relative; overflow: hidden;
+  border-radius: 22px; color: var(--on-navy);
+  background:
+    radial-gradient(60% 90% at 90% 10%, rgba(91, 124, 255, 0.35), transparent 60%),
+    radial-gradient(50% 80% at 0% 100%, rgba(19, 54, 240, 0.3), transparent 60%),
+    var(--navy);
+  padding: clamp(24px, 4vw, 48px);
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px 40px; align-items: end;
+}
+.hero__giant {
+  position: absolute; right: -2%; bottom: -18%; pointer-events: none;
+  font-size: clamp(5rem, 16vw, 14rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1;
+  color: transparent; -webkit-text-stroke: 1px rgba(223, 227, 245, 0.12);
+}
+.hero__text { display: flex; flex-direction: column; gap: 14px; position: relative; }
+.hero__text h1 { font-size: var(--fs-2xl); color: #fff; }
+.hero__controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.hero__controls .input { width: auto; min-height: 44px; background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); color: #fff; }
+.hero__controls .input option { color: #00072d; background: #fff; }
+.hero__neta {
+  position: relative; display: flex; flex-direction: column; gap: 8px;
+  padding: 22px 24px; border-radius: var(--radius-lg);
+  background: rgba(10, 36, 114, 0.35); border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.hero__value { font-size: clamp(2.4rem, 1.6rem + 3.4vw, 4.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums; color: #fff; }
+.hero__value.is-neg { color: #ff8fa3; }
+.hero__note { font-size: var(--fs-sm); color: var(--on-navy-2); }
+.hero__note b { color: var(--on-navy); }
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; } }
+
+/* ---------- RESUMEN: tarjetas de números ---------- */
+.kpis { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.kpis--stock { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.kpi {
+  background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-lg);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px); box-shadow: var(--shadow);
+  padding: 16px 18px; display: flex; flex-direction: column; gap: 6px; min-width: 0;
+}
+.kpi__label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+.kpi__value { font-size: clamp(1.3rem, 1.1rem + 0.8vw, 1.7rem); font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.15; }
+.kpi__note { font-size: 12.5px; color: var(--ink-2); }
+.kpi__note a { color: var(--accent-ink); font-weight: 700; }
+@media (max-width: 760px) { .kpis, .kpis--stock { grid-template-columns: 1fr 1fr; } .kpis--stock .kpi:last-child { grid-column: 1 / -1; } }
+
+/* ---------- RESUMEN: comparaciones ---------- */
+.compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.compare__card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; }
+.compare__row { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; align-items: baseline; font-size: 14px; }
+.delta { display: inline-flex; padding: 2px 8px; border-radius: 999px; font-size: 11.5px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.delta--up { background: var(--ok-bg); color: var(--ok); }
+.delta--down { background: var(--bad-bg); color: var(--bad); }
+.delta--flat { background: var(--surface-2); color: var(--ink-2); }
+
+/* ---------- RESUMEN: gráfico mensual ---------- */
+.chart-card { position: relative; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 18px; min-width: 0; }
+.legend { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--ink-2); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.chart { width: 100%; margin-top: 12px; }
+.chart text { fill: var(--ink-2); font-family: var(--font-sans); font-size: 11px; }
+.chart .grid-line { stroke: var(--line); stroke-width: 1; }
+.chart .zero-line { stroke: var(--ink-2); stroke-width: 1; }
+.chart .hit { fill: transparent; cursor: pointer; }
+.chart .hit:hover, .chart .hit.is-selected { fill: var(--surface-2); }
+.chart-tip {
+  position: absolute; pointer-events: none; z-index: 5; min-width: 180px;
+  background: var(--navy); color: var(--on-navy); padding: 12px 14px; border-radius: 10px; font-size: 12.5px;
+  box-shadow: 0 12px 30px -8px rgba(0, 4, 32, 0.5);
+}
+.chart-tip b { display: block; margin-bottom: 6px; font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 16px; color: #fff; }
+.chart-tip div { display: flex; justify-content: space-between; gap: 16px; font-variant-numeric: tabular-nums; }
+
+/* ---------- VENTAS: formulario + recibo ---------- */
+.sale-layout { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .sale-layout { grid-template-columns: 1fr; } }
+.receipt {
+  position: sticky; top: calc(var(--header-h) + 24px);
+  border-radius: var(--radius-lg); overflow: hidden; color: var(--on-navy);
+  background: radial-gradient(80% 60% at 100% 0%, rgba(91, 124, 255, 0.3), transparent 60%), var(--navy);
+  box-shadow: var(--shadow);
+}
+.receipt__head { padding: 18px 22px 14px; border-bottom: 1px dashed rgba(223, 227, 245, 0.25); display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.receipt__head h3 { font-family: var(--font-serif); font-style: italic; font-weight: 400; font-size: 1.4rem; color: #fff; }
+.receipt__body { padding: 16px 22px; display: flex; flex-direction: column; gap: 9px; font-size: 14px; }
+.receipt__line { display: flex; justify-content: space-between; gap: 14px; font-variant-numeric: tabular-nums; }
+.receipt__line span:first-child { color: var(--on-navy-2); }
+.receipt__total { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; padding: 16px 22px; border-top: 1px dashed rgba(223, 227, 245, 0.25); border-bottom: 1px dashed rgba(223, 227, 245, 0.25); }
+.receipt__total span { font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-on-navy); }
+.receipt__total b { font-size: 2.2rem; font-weight: 800; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; color: #fff; }
+.receipt__foot { padding: 14px 22px 18px; display: flex; flex-direction: column; gap: 10px; }
+.receipt__warn { background: rgba(240, 199, 102, 0.16); color: #f0c766; padding: 10px 12px; border-radius: var(--radius); font-size: 13px; }
+.receipt__ok { background: rgba(127, 217, 168, 0.16); color: #7fd9a8; padding: 10px 12px; border-radius: var(--radius); font-size: 13.5px; font-weight: 600; }
+.receipt .neg { color: #ff8fa3; }
+
+/* Totales del día y del filtro */
+.totals { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+.totals > div { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 12px 16px; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.totals b { font-size: 1.15rem; font-variant-numeric: tabular-nums; }
+.totals span { font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+@media (max-width: 640px) { .totals { grid-template-columns: 1fr 1fr; } }
+
+/* ---------- GASTOS: barras por categoría ---------- */
+.cats { display: flex; flex-direction: column; gap: 12px; }
+.cat { display: grid; grid-template-columns: minmax(96px, 150px) 1fr auto; gap: 12px; align-items: center; font-size: 13.5px; }
+.cat__track { height: 12px; border-radius: 6px; background: var(--surface-2); overflow: hidden; }
+.cat__fill { height: 100%; background: var(--c-ventas); border-radius: 0 6px 6px 0; }
+.cat__amount { font-weight: 700; font-variant-numeric: tabular-nums; text-align: right; min-width: 110px; }
+
+/* ---------- INVENTARIO: panel de agregar ---------- */
+.calc { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; padding: 12px 14px; border-radius: var(--radius); background: var(--surface-2); }
+.calc div { display: flex; flex-direction: column; }
+.calc span { font-size: 10.5px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+.calc b { font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.actions-bar { display: flex; flex-wrap: wrap; gap: 10px; }
+
+/* ---------- VENTAS: varias prendas por venta ---------- */
+.lines { display: flex; flex-direction: column; gap: 10px; }
+.line { border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--surface); padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+.line__top { display: flex; align-items: flex-end; gap: 10px; }
+.line__top .field { flex: 1; }
+.line__n { flex: none; width: 28px; height: 28px; margin-bottom: 9px; border-radius: 50%; display: grid; place-items: center; background: var(--navy); color: var(--on-navy); font-size: 12px; font-weight: 700; }
+.line__nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.line__foot { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 12px; font-size: 13px; color: var(--ink-2); }
+.line__foot b { color: var(--ink); font-variant-numeric: tabular-nums; }
+.line .field label { font-size: 10px; }
+.add-line { align-self: flex-start; }
+.receipt__item { display: flex; justify-content: space-between; gap: 12px; font-variant-numeric: tabular-nums; }
+.receipt__item small { display: block; color: var(--on-navy-2); font-size: 11.5px; }
+.receipt__item b { white-space: nowrap; }
+.receipt__body--sep { border-top: 1px dashed rgba(223, 227, 245, 0.25); }
+@media (max-width: 420px) { .line__nums { grid-template-columns: 1fr 1fr; } .line__nums .field:last-child { grid-column: 1 / -1; } }
+
+/* ---------- VENTAS: clientes (resaltados en amarillo) ---------- */
+.clients { display: flex; flex-wrap: wrap; gap: 8px; }
+.client-chip {
+  display: inline-flex; align-items: baseline; gap: 8px; padding: 8px 14px; border-radius: 999px;
+  background: var(--warn-bg); color: var(--warn); border: 1px solid transparent;
+  font-size: 13px; font-weight: 700; text-align: left;
+}
+.client-chip span { font-weight: 500; font-size: 12px; opacity: 0.9; }
+.client-chip:hover, .client-chip[aria-pressed="true"] { border-color: var(--warn); }

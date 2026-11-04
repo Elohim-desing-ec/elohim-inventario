@@ -1,0 +1,85 @@
+/* =========================================================
+   ELOHIM INVENTARIO · VARIABLES
+   Colores, tipografías y medidas. Es la misma identidad que la
+   tienda web (azul noche + Montserrat + Playfair Display).
+   Cambia aquí y se actualiza toda la app.
+   ========================================================= */
+:root {
+  /* Marca (fijos en los dos temas) */
+  --navy: #00072d;          /* Rich Black: header, bandas oscuras */
+  --navy-2: #051650;
+  --navy-3: #0a2472;
+  --on-navy: #dfe3f5;       /* texto sobre azul noche */
+  --on-navy-2: #a3abcf;     /* texto secundario sobre azul noche */
+  --accent-on-navy: #5b7cff;/* acento brillante sobre azul noche */
+
+  /* Tema claro */
+  --bg: #f3f5fc;            /* fondo general */
+  --surface: #ffffff;       /* tarjetas y tablas */
+  --surface-2: #e8ebf8;     /* cabeceras de tabla, zonas suaves */
+  --glass: rgba(255, 255, 255, 0.66);
+  --glass-border: rgba(255, 255, 255, 0.7);
+  --ink: #00072d;           /* texto principal */
+  --ink-2: #5d6382;         /* texto secundario */
+  --line: #d9ddef;          /* bordes finos */
+  --accent: #1336f0;        /* botones de acción */
+  --accent-ink: #123499;    /* textos de acento (eyebrow, enlaces) */
+  --btn: #00072d;           /* botón principal */
+  --btn-ink: #f3f5fc;
+  --glow-1: rgba(19, 54, 240, 0.10);
+  --glow-2: rgba(10, 36, 114, 0.10);
+
+  /* Estados */
+  --ok: #17663f;   --ok-bg: #dcf0e4;
+  --warn: #7a5200; --warn-bg: #fbecc6;
+  --bad: #b3263f;  --bad-bg: #f8dde2;
+
+  /* Gráfico (validados para daltonismo) */
+  --c-ventas: #1336f0;
+  --c-neta: #0f8f6f;
+
+  --shadow: 0 10px 40px -14px rgba(0, 7, 45, 0.28);
+
+  /* Tipografías */
+  --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  --fs-xs: 0.72rem;
+  --fs-sm: 0.85rem;
+  --fs-md: 0.95rem;
+  --fs-lg: clamp(1.1rem, 1rem + 0.5vw, 1.3rem);
+  --fs-xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+  --fs-2xl: clamp(2.1rem, 1.3rem + 3vw, 3.8rem);
+
+  /* Medidas */
+  --container: 1280px;
+  --gutter: max(16px, min(4vw, 40px));
+  --header-h: 68px;
+  --radius: 4px;
+  --radius-lg: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #00072d; --surface: #061040; --surface-2: #0b1a5c;
+    --glass: rgba(6, 16, 64, 0.72); --glass-border: rgba(255, 255, 255, 0.12);
+    --ink: #eef0fa; --ink-2: #a3abcf; --line: #1c2b6e;
+    --accent: #5b7cff; --accent-ink: #8ea3ff; --btn: #dfe3f5; --btn-ink: #00072d;
+    --glow-1: rgba(19, 54, 240, 0.22); --glow-2: rgba(91, 124, 255, 0.12);
+    --ok: #7fd9a8; --ok-bg: #0d3a2b; --warn: #f0c766; --warn-bg: #3a2e0c; --bad: #ff8fa3; --bad-bg: #401327;
+    --c-ventas: #5b7cff; --c-neta: #1fa57e;
+    --shadow: 0 10px 40px -14px rgba(0, 0, 0, 0.6);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #00072d; --surface: #061040; --surface-2: #0b1a5c;
+  --glass: rgba(6, 16, 64, 0.72); --glass-border: rgba(255, 255, 255, 0.12);
+  --ink: #eef0fa; --ink-2: #a3abcf; --line: #1c2b6e;
+  --accent: #5b7cff; --accent-ink: #8ea3ff; --btn: #dfe3f5; --btn-ink: #00072d;
+  --glow-1: rgba(19, 54, 240, 0.22); --glow-2: rgba(91, 124, 255, 0.12);
+  --ok: #7fd9a8; --ok-bg: #0d3a2b; --warn: #f0c766; --warn-bg: #3a2e0c; --bad: #ff8fa3; --bad-bg: #401327;
+  --c-ventas: #5b7cff; --c-neta: #1fa57e;
+  --shadow: 0 10px 40px -14px rgba(0, 0, 0, 0.6);
+  color-scheme: dark;
+}
