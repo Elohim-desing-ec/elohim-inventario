@@ -37,3 +37,7 @@ python3 servidor.py --reporte 2027 --archivo elohim-respaldo-AAAA-MM-DD.json
 python3 servidor.py --reporte 2027 1 --archivo elohim-respaldo-AAAA-MM-DD.json   # solo enero
 python3 servidor.py --stock --archivo elohim-respaldo-AAAA-MM-DD.json
 ```
+
+## Si cambias el código
+
+Cada CSS y JS se carga con un número de versión (`?v=...` en `index.html`). Si editas algún archivo, cambia ese número en `index.html` (por ejemplo a la fecha de hoy) para que los navegadores no mezclen archivos viejos con nuevos.

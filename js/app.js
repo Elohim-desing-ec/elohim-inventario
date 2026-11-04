@@ -37,6 +37,21 @@
     });
   };
 
+  /* ---------- Si algo falla al cargar: aviso con botón Recargar ---------- */
+  let avisado = false;
+  E.falloCarga = msg => {
+    if (avisado) return; avisado = true;
+    $("#avisos").innerHTML = `<div class="notice notice--bad" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>${msg || "No se pudieron cargar tus datos. Revisa tu internet y recarga la página."}</span><button class="btn btn--sm" type="button" data-act="recargar">Recargar</button></div>`;
+  };
+  E.acts = E.acts || {};
+  E.acts.recargar = () => location.reload();
+  window.addEventListener("error", () => { if (!E.ready()) E.falloCarga("Algo falló al abrir la app. Pulsa Recargar."); });
+  window.addEventListener("unhandledrejection", () => { if (!E.ready()) E.falloCarga("Algo falló al abrir la app. Pulsa Recargar."); });
+  // Si tras 15 segundos con sesión iniciada aún no hay datos, ofrece recargar
+  setInterval(() => {
+    if (!document.body.classList.contains("is-locked") && E.Store.mode === "supabase" && E.yo && !E.ready()) E.falloCarga("Está tardando en cargar. Revisa tu internet y pulsa Recargar.");
+  }, 15000);
+
   /* ---------- Menú de usuario ---------- */
   const panel = $("#userPanel"), avatar = $("#avatarBtn");
   const abrirMenu = si => { panel.hidden = !si; avatar.setAttribute("aria-expanded", String(si)); };
@@ -53,7 +68,7 @@
     if (a === "ordenar") { const s = E.sorts[b.dataset.t], k = b.dataset.k; if (s.key === k) s.dir *= -1; else { s.key = k; s.dir = 1; } E.render(); return; }
     if (a === "ordenDir") { E.sorts[b.dataset.t].dir *= -1; E.render(); return; }
     if (a === "cerrarDialogo") { const d = b.closest("dialog"); if (d) d.close(); return; }
-    if (E.Store.readOnly && !["salir", "verMes", "verStockBajo", "exportarJSON", "exportarExcel", "exportarCSV", "cerrarPrenda", "cerrarPrecio"].includes(a)) { E.toast("Solo puedes ver estos datos.", true); return; }
+    if (E.Store.readOnly && !["salir", "recargar", "verMes", "verStockBajo", "exportarJSON", "exportarExcel", "exportarCSV", "cerrarPrenda", "cerrarPrecio"].includes(a)) { E.toast("Solo puedes ver estos datos.", true); return; }
     if (E.acts[a]) E.acts[a](b, e);
   });
   document.addEventListener("change", e => {

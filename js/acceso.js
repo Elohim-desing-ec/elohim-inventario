@@ -40,18 +40,20 @@
 
   async function entrar() {
     document.body.classList.remove("is-locked");
-    $("#acceso").hidden = true;
+    const poner = (sel, fn) => { const el = $(sel); if (el) fn(el); }; // no falla si falta algún elemento
+    poner("#acceso", el => { el.hidden = true; });
     // Menú de usuario: iniciales, nombre, rol y Salir
-    const ini = E.yo.nombre.trim().split(/\s+/).slice(0, 2).map(w => w[0] || "").join("").toUpperCase() || "?";
-    $("#avatarIniciales").textContent = ini;
-    $("#avatarBtn").title = E.yo.nombre;
-    $("#userWho").hidden = false;
-    $("#userNombre").textContent = E.yo.nombre;
-    $("#userRol").textContent = (E.yo.rol === "admin" ? "Administrador" : "Empleado") + " · " + E.yo.usuario;
-    $("#btnSalir").hidden = false;
+    const nombre = String(E.yo.nombre || E.yo.usuario || "").trim();
+    const ini = nombre.split(/\s+/).slice(0, 2).map(w => w[0] || "").join("").toUpperCase() || "?";
+    poner("#avatarIniciales", el => { el.textContent = ini; });
+    poner("#avatarBtn", el => { el.title = nombre; });
+    poner("#userWho", el => { el.hidden = false; });
+    poner("#userNombre", el => { el.textContent = nombre; });
+    poner("#userRol", el => { el.textContent = (E.yo.rol === "admin" ? "Administrador" : "Empleado") + " · " + E.yo.usuario; });
+    poner("#btnSalir", el => { el.hidden = false; });
     E.$$('[data-nav="usuarios"]').forEach(a => { a.hidden = E.yo.rol !== "admin"; });
     try { await E.entrarNube(); }
-    catch (e) { E.toast("No se pudieron cargar los datos. Revisa tu conexión y recarga la página.", true); }
+    catch (e) { console.error(e); E.falloCarga && E.falloCarga(); }
     E.showPage && E.showPage();
   }
 
