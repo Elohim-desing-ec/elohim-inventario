@@ -148,3 +148,10 @@
 }
 .client-chip span { font-weight: 500; font-size: 12px; opacity: 0.9; }
 .client-chip:hover, .client-chip[aria-pressed="true"] { border-color: var(--warn); }
+
+/* ---------- Ajustes para celular ---------- */
+.hero__neta .eyebrow { display: block; line-height: 1.6; }
+.hero__neta .eyebrow::before { display: inline-block; vertical-align: middle; margin-right: 10px; }
+@media (max-width: 760px) {
+  .table td > .pill, .table td > select.estado, .table td > .only-mobile { align-self: flex-start; }
+}

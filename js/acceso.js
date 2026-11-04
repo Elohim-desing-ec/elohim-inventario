@@ -41,8 +41,14 @@
   async function entrar() {
     document.body.classList.remove("is-locked");
     $("#acceso").hidden = true;
-    $("#userChip").hidden = false;
-    $("#userNombre").textContent = E.yo.nombre + (E.yo.rol === "admin" ? " · Administrador" : "");
+    // Menú de usuario: iniciales, nombre, rol y Salir
+    const ini = E.yo.nombre.trim().split(/\s+/).slice(0, 2).map(w => w[0] || "").join("").toUpperCase() || "?";
+    $("#avatarIniciales").textContent = ini;
+    $("#avatarBtn").title = E.yo.nombre;
+    $("#userWho").hidden = false;
+    $("#userNombre").textContent = E.yo.nombre;
+    $("#userRol").textContent = (E.yo.rol === "admin" ? "Administrador" : "Empleado") + " · " + E.yo.usuario;
+    $("#btnSalir").hidden = false;
     E.$$('[data-nav="usuarios"]').forEach(a => { a.hidden = E.yo.rol !== "admin"; });
     try { await E.entrarNube(); }
     catch (e) { E.toast("No se pudieron cargar los datos. Revisa tu conexión y recarga la página.", true); }
@@ -52,7 +58,7 @@
   /* Muestra la pantalla de inicio de sesión (o la de crear administrador) */
   E.mostrarAcceso = async msg => {
     document.body.classList.add("is-locked");
-    $("#acceso").hidden = false; $("#userChip").hidden = true;
+    $("#acceso").hidden = false;
     error(msg || "");
     let primera = false;
     try { primera = (await E.llamarUsuarios("estado")).necesitaAdmin; } catch (e) { error("No hay conexión con la base de datos. Revisa tu internet y recarga la página."); }

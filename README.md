@@ -23,7 +23,7 @@ Para tener una copia propia: **Datos → Exportar respaldo** (archivo JSON) o **
 | Carpeta / archivo | Qué es |
 | --- | --- |
 | `index.html` | La página y sus secciones: Resumen, Inventario, Ventas, Gastos, Datos, Usuarios |
-| `css/` | Diseño: `variables.css` (colores y letras), `base.css`, `layout.css`, `components.css`, `secciones.css` |
+| `css/` | Diseño: `variables.css` (colores y letras), `base.css`, `layout.css`, `components.css`, `secciones.css` y `vidrio.css` (efecto vidrio de la tienda) |
 | `js/` | Funciones: un archivo por sección, más `calculos.js` (fórmulas), `guardado.js`, `acceso.js` (inicio de sesión) y `nube-config.js` (conexión a Supabase) |
 | `servidor.py` | Programa de Python opcional para reportes en la Terminal |
 | `assets/img/` | Logo e ícono |

@@ -37,6 +37,14 @@
     });
   };
 
+  /* ---------- Menú de usuario ---------- */
+  const panel = $("#userPanel"), avatar = $("#avatarBtn");
+  const abrirMenu = si => { panel.hidden = !si; avatar.setAttribute("aria-expanded", String(si)); };
+  avatar.addEventListener("click", e => { e.stopPropagation(); abrirMenu(panel.hidden); });
+  document.addEventListener("click", e => { if (!panel.hidden && !e.target.closest(".user-menu")) abrirMenu(false); });
+  panel.addEventListener("click", e => { if (e.target.closest("a, button")) abrirMenu(false); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !panel.hidden) { abrirMenu(false); avatar.focus(); } });
+
   /* ---------- Botones con data-act ---------- */
   document.addEventListener("click", e => {
     const b = e.target.closest("[data-act]");

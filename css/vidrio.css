@@ -1,0 +1,157 @@
+/* =========================================================
+   ELOHIM INVENTARIO · EFECTO VIDRIO (como la tienda ELOHIM)
+   Vidrio translúcido con desenfoque, brillo en el borde y
+   sombra suave. Para quitarlo, borra la línea de este archivo
+   en index.html.
+   ========================================================= */
+:root {
+  --vidrio: rgba(255, 255, 255, 0.55);
+  --vidrio-fuerte: rgba(243, 245, 252, 0.8);
+  --vidrio-campo: rgba(255, 255, 255, 0.7);
+  --vidrio-cabeza: rgba(255, 255, 255, 0.4);
+  --vidrio-borde: rgba(255, 255, 255, 0.7);
+  --vidrio-borde-campo: rgba(0, 7, 45, 0.12);
+  --vidrio-brillo: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 0 -1px 0 rgba(255, 255, 255, 0.2);
+  --vidrio-sombra: 0 10px 40px -12px rgba(0, 7, 45, 0.25);
+  --vidrio-blur: blur(22px) saturate(180%);
+  --vidrio-blur-sm: blur(12px) saturate(160%);
+  --luz-1: rgba(19, 54, 240, 0.16);
+  --luz-2: rgba(91, 124, 255, 0.18);
+  --luz-3: rgba(10, 36, 114, 0.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --vidrio: rgba(10, 36, 114, 0.28);
+    --vidrio-fuerte: rgba(6, 16, 64, 0.86);
+    --vidrio-campo: rgba(255, 255, 255, 0.06);
+    --vidrio-cabeza: rgba(255, 255, 255, 0.05);
+    --vidrio-borde: rgba(255, 255, 255, 0.14);
+    --vidrio-borde-campo: rgba(255, 255, 255, 0.16);
+    --vidrio-brillo: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+    --vidrio-sombra: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+    --luz-1: rgba(19, 54, 240, 0.3);
+    --luz-2: rgba(91, 124, 255, 0.16);
+    --luz-3: rgba(26, 69, 196, 0.22);
+  }
+}
+:root[data-theme="dark"] {
+  --vidrio: rgba(10, 36, 114, 0.28);
+  --vidrio-fuerte: rgba(6, 16, 64, 0.86);
+  --vidrio-campo: rgba(255, 255, 255, 0.06);
+  --vidrio-cabeza: rgba(255, 255, 255, 0.05);
+  --vidrio-borde: rgba(255, 255, 255, 0.14);
+  --vidrio-borde-campo: rgba(255, 255, 255, 0.16);
+  --vidrio-brillo: inset 0 1px 0 rgba(255, 255, 255, 0.14), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+  --vidrio-sombra: 0 20px 50px -20px rgba(0, 0, 0, 0.6);
+  --luz-1: rgba(19, 54, 240, 0.3);
+  --luz-2: rgba(91, 124, 255, 0.16);
+  --luz-3: rgba(26, 69, 196, 0.22);
+}
+
+/* ---------- Luces azules de fondo (para que el vidrio se note) ---------- */
+.glow {
+  background:
+    radial-gradient(42vmax 42vmax at 6% 12%, var(--luz-1), transparent 62%),
+    radial-gradient(40vmax 40vmax at 94% 38%, var(--luz-2), transparent 62%),
+    radial-gradient(38vmax 38vmax at 28% 96%, var(--luz-3), transparent 62%),
+    radial-gradient(30vmax 30vmax at 78% 92%, var(--luz-1), transparent 62%);
+}
+
+/* ---------- Bloques de vidrio ---------- */
+.card, .kpi, .compare__card, .chart-card, .table-wrap, .totals > div, .empty, .notice:not(.notice--warn):not(.notice--bad):not(.notice--ok) {
+  background: var(--vidrio);
+  -webkit-backdrop-filter: var(--vidrio-blur);
+  backdrop-filter: var(--vidrio-blur);
+  border: 1px solid var(--vidrio-borde);
+  box-shadow: var(--vidrio-brillo), var(--vidrio-sombra);
+}
+.card, .chart-card, .table-wrap, .empty { border-radius: 24px; }
+.kpi, .compare__card, .totals > div { border-radius: 20px; }
+.notice { border-radius: 16px; }
+.empty { border-style: solid; }
+
+/* Filas de prendas en una venta y cajas de cálculo */
+.line, .calc, .list {
+  background: var(--vidrio-campo);
+  border: 1px solid var(--vidrio-borde);
+  box-shadow: var(--vidrio-brillo);
+  border-radius: 18px;
+}
+
+/* ---------- Campos y selectores ---------- */
+.input {
+  background: var(--vidrio-campo);
+  border-color: var(--vidrio-borde-campo);
+  border-radius: 14px;
+  -webkit-backdrop-filter: var(--vidrio-blur-sm);
+  backdrop-filter: var(--vidrio-blur-sm);
+  box-shadow: var(--vidrio-brillo);
+}
+select.estado { box-shadow: var(--vidrio-brillo); }
+
+/* ---------- Botones de vidrio ---------- */
+.btn--outline {
+  background: var(--vidrio-campo);
+  -webkit-backdrop-filter: var(--vidrio-blur-sm);
+  backdrop-filter: var(--vidrio-blur-sm);
+  border-color: var(--vidrio-borde-campo);
+  box-shadow: var(--vidrio-brillo);
+}
+.btn--action { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 10px 30px -10px rgba(19, 54, 240, 0.7); }
+.btn:not(.btn--outline):not(.btn--danger) { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 8px 22px -12px rgba(0, 7, 45, 0.6); }
+.btn--action { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 10px 30px -10px rgba(19, 54, 240, 0.7) !important; }
+.btn--danger { background: var(--vidrio-campo); -webkit-backdrop-filter: var(--vidrio-blur-sm); backdrop-filter: var(--vidrio-blur-sm); }
+
+/* ---------- Tablas ---------- */
+.table th { background: var(--vidrio-cabeza); }
+.table tfoot td { background: var(--vidrio-cabeza); }
+.table tbody tr:hover td { background: var(--vidrio-cabeza); }
+@media (max-width: 760px) {
+  .table-wrap { background: none; border: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; border-radius: 0; }
+  .table tr {
+    background: var(--vidrio);
+    -webkit-backdrop-filter: var(--vidrio-blur);
+    backdrop-filter: var(--vidrio-blur);
+    border: 1px solid var(--vidrio-borde);
+    box-shadow: var(--vidrio-brillo), var(--vidrio-sombra);
+    border-radius: 20px;
+  }
+  .table tfoot tr { background: var(--vidrio-cabeza); }
+  .mobile-sort select, .mobile-sort button { background: var(--vidrio-campo); border-color: var(--vidrio-borde-campo); border-radius: 14px; }
+}
+
+/* ---------- Recibo y banda principal: vidrio oscuro ---------- */
+.receipt, .hero { border: 1px solid rgba(255, 255, 255, 0.14); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 24px 60px -24px rgba(0, 4, 32, 0.6); }
+.receipt { border-radius: 26px; }
+.hero { border-radius: 28px; }
+.hero__neta { border-radius: 22px; }
+.hero__controls .input { border-radius: 999px; }
+
+/* ---------- Ventanas ---------- */
+dialog {
+  background: var(--vidrio-fuerte);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid var(--vidrio-borde);
+  box-shadow: var(--vidrio-brillo), 0 30px 60px -20px rgba(0, 0, 0, 0.45);
+  border-radius: 28px;
+}
+dialog::backdrop { background: rgba(0, 7, 45, 0.35); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+@media (max-width: 560px) { dialog { border-radius: 28px 28px 0 0; } }
+
+/* ---------- Mensaje flotante ---------- */
+.toast {
+  background: rgba(0, 7, 45, 0.72);
+  -webkit-backdrop-filter: var(--vidrio-blur);
+  backdrop-filter: var(--vidrio-blur);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 30px 60px -20px rgba(0, 0, 0, 0.35);
+}
+
+/* ---------- Clientes ---------- */
+.client-chip { box-shadow: var(--vidrio-brillo); }
+
+/* Si el navegador no soporta desenfoque, se ve sólido y legible */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .card, .kpi, .compare__card, .chart-card, .table-wrap, .totals > div, .empty, dialog { background: var(--surface); }
+}
